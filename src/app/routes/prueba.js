@@ -32,15 +32,14 @@ module.exports = app => {
   });
 
   app.post('/news', (req, res) => {
-    const { valor1, valor2, valor3 } = req.body;
-    connection.query('INSERT INTO pruebaApi SET ? ',
+    const { valor1, valor2 } = req.body;
+    connection.query('INSERT INTO pruebas.pruebaapi SET ? ',
       {
         valor1,
         valor2,
-        valor3
       }
     , (err, result) => {
-      
+      res.send(err);
     });
   });
 
