@@ -18,12 +18,16 @@
             <th>ID</th>
             <th>Title</th>
             <th>News</th>
+            <th>Boton</th>
           </tr>
           <% for (var i = 0; i < fors.length; i ++) { %>
             <tr>
-              <td><%= fors[i].id_noticia %></td>
-              <td><%= fors[i].titulo_noticia %></td>
-              <td><%= fors[i].texto_noticia %></td>
+              <td><%= fors[i].idpruebaApi %></td>
+              <td><%= fors[i].valor1 %></td>
+              <td><%= fors[i].valor2 %></td> 
+              <td><a name="id" href="/<%= fors[i].idpruebaApi %>" class="btn btn-danger">Delete</a>
+                  <a name="editid" href="edit/<%= fors[i].idpruebaApi %>" class="btn btn-secondary">Edit</a>
+              </td>
             </tr>
           <% } %>
         </table>
@@ -31,7 +35,7 @@
 
       <div class="col-md-6 mt-4 card">
         <form class="card-body" action="/news" method="post">
-          <h3 class="card-title">Add News</h3>
+          <h3 class="card-title">Edit News</h3>
           <div class="form-group">
             <input name="valor1" type="text" class="form-control" placeholder="News Titlte">
           </div>

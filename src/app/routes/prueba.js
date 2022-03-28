@@ -1,62 +1,82 @@
-const dbConnection = require('../../config/dbConnection');
+const dbConnection = require("../../config/dbConnection");
 
-module.exports = app => {
-
+module.exports = (app) => {
   const connection = dbConnection();
 
-  app.get('/noticias', (req, res) => {
-    connection.query('SELECT * FROM noticias', (err, result) => {
-      res.send(
-        result
-     );
-    });
-  });
-
-
-  
-  app.get('/sesiones', (req, res) => {
-    connection.query('SELECT * FROM sesiones', (err, result) => {
-      res.send(
-        result
-     );
-    });
-  });
-
-
-  app.get('/news', (req, res) => {
-    connection.query('SELECT * FROM noticias', (err, result) => {
-      res.render('news/news', {
-        fors: result
-      });
-    });
-  });
-
-  app.post('/news', (req, res) => {
-    const { valor1, valor2 } = req.body;
-    connection.query('INSERT INTO pruebas.pruebaapi SET ? ',
-      {
-        valor1,
-        valor2,
+  // GET DATA
+  app.get("/", (req, res) => {
+     connection.query("SELECT * FROM pruebas.pruebaapi", (err, rows, fields) => {
+      if (!err) {
+        res.json(rows);
+      } else {
+        console.log(err);
       }
-    , (err, result) => {
-      res.send(err);
     });
   });
 
-
-  app.post('/insert', (req, res) => {
-    // const { title, news } = req.body;
-    const valor1 = "pruebaApi"
-    const valor2 = "segundovalorprueba"
-    const valor3 = 1
-    connection.query('INSERT INTO pruebaapi SET ? ',
-      {
-        valor1,
-        valor2,
-        valor3
+  // GET DATA WITH ID
+  app.get("/:id", (req, res) => {
+    const { id } = req.params;
+     connection.query(
+      "SELECT * FROM pruebas.pruebaapi WHERE idpruebaApi = ?",
+      [id],
+      (err, rows, fields) => {
+        if (rows != '') {
+          res.json(rows[0]);
+        } else {
+          console.log("Not Found" );
+        }
       }
-    , (err, result) => {
-      res.redirect('/news');
+    );
+  });
+
+  // DELETE DATA
+  app.delete("/:id", (req, res) => {
+    const { id } = req.params;
+     connection.query(
+      "DELETE FROM pruebas.pruebaapi WHERE idpruebaApi = ?",
+      [id],
+      (err, rows, fields) => {
+        if (!err) {
+          res.json({ status: "Data Deleted" });
+        } else {
+          console.log(err);
+        }
+      }
+    );
+  });
+
+  // INSERT DATA
+  app.post("/", (req, res) => {
+    const { valor1, valor2,valor3 } = req.body;
+    console.log(valor1, valor2, valor3);
+
+    const query = ` INSERT INTO pruebas.pruebaapi SET valor1 = ` + "'" + valor1 + "'" + ' , valor2 = ' + "'" + valor2 + "'" + ' , valor3 =' + "'" + valor3 + "'";
+    // res.json({ query });
+
+     connection.query(query, (err, rows, fields) => {
+      if (!err) {
+        res.json({ status: "Data Saved" });
+      } else {
+        console.log(err);
+      }
+    });
+   }); 
+
+   //UPDATE DATA
+  app.put("/:id", (req, res) => {
+
+    const { valor1, valor2,valor3 } = req.body;
+    const idpruebaApi =  req.params.id;
+    const query = `  UPDATE pruebas.pruebaapi SET valor1 = ` + "'" + valor1 + "'" + ' , valor2 = ' + "'" + valor2 + "'" + ' , valor3 =' + "'" + valor3 + "'" + ' WHERE idpruebaApi = ' + idpruebaApi;
+    // res.json({ query });
+    
+     connection.query(query, (err, rows, fields) => {
+      if (!err) {
+        res.json({ status: "Data Updated" });
+      } else {
+        console.log(err);
+      }
     });
   });
 };
