@@ -1,16 +1,22 @@
 [
     {
-        "id": "1",
-        "title": "Aliens",
-        "director": "James Cameron",
-        "year": "1986",
-        "rating": "8.5"
+        "valor1": "Aliens",
+        "valor2": "James Cameron",
+        "valor3": 1986
     },
     {
-        "id": "2",
-        "title": "The Dark Knight",
-        "director": "Cristopher Nolan",
-        "year": "2008",
-        "rating": "10.0"
+        "valor1": "Harry potter",
+        "valor2": "David Ayer",
+        "valor3": 2001
+    },
+    {
+        "valor1": "Mision Imposible",
+        "valor2": "Brat Bird",
+        "valor3": 1999
+    }, 
+    {
+        "valor1": "The power of the dog",
+        "valor2": "Jane Campion",
+        "valor3": 2021
     }
 ]
