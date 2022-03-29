@@ -84,20 +84,20 @@ module.exports = (app) => {
 
 
 
-//   //INSERT DATA WITH JSON DOCUMENT
-//   app.post("/testing", (req, res) => {
-//     for (let i = 0; i < movies.length; i++) {
-//         const query = ` INSERT INTO pruebas.pruebaapi SET valor1 = ` + "'" + movies[i].valor1 + "'" + ' , valor2 = ' + "'" + movies[i].valor2 + "'" + ' , valor3 =' + "'" + movies[i].valor3 + "'";
-//         connection.query(query, (err, rows, fields) => {
-//           if (!err) {
-//             console.log("Ok");
-//           } else { 
-//             console.log("Error");
-//           }
-//         });
-//       }
+  //INSERT DATA WITH JSON DOCUMENT
+  app.post("/testing", (req, res) => {
+    for (let i = 0; i < movies.length; i++) {
+        const query = ` INSERT INTO pruebas.pruebaapi SET valor1 = ` + "'" + movies[i].valor1 + "'" + ' , valor2 = ' + "'" + movies[i].valor2 + "'" + ' , valor3 =' + "'" + movies[i].valor3 + "'";
+        connection.query(query, (err, rows, fields) => {
+          if (!err) {
+            console.log("Ok");
+          } else { 
+            console.log("Error");
+          }
+        });
+      }
 
-//    }); 
+   }); 
 
 
 
