@@ -70,8 +70,6 @@ module.exports = (app) => {
     const { valor1, valor2,valor3 } = req.body;
     const idpruebaApi =  req.params.id;
     const query = `  UPDATE pruebas.pruebaapi SET valor1 = ` + "'" + valor1 + "'" + ' , valor2 = ' + "'" + valor2 + "'" + ' , valor3 =' + "'" + valor3 + "'" + ' WHERE idpruebaApi = ' + idpruebaApi;
-    // res.json({ query });
-    
      connection.query(query, (err, rows, fields) => {
       if (!err) {
         res.json({ status: "Data Updated" });
@@ -87,20 +85,18 @@ module.exports = (app) => {
   //INSERT DATA WITH JSON DOCUMENT
   app.post("/testing", (req, res) => {
     const datos = req.body;
-
-    console.log( datos );
     for (let i = 0; i < datos.length; i++) {
-         const query = ` INSERT INTO pruebas.pruebaapi SET valor1 = ` + "'" + datos[i].valor1 + "'" + ' , valor2 = ' + "'" + datos[i].valor2 + "'" + ' , valor3 =' + "'" + datos[i].valor3 + "'";
-        //  console.log( datos[i] );
-        //  console.log( datos[i].valor1 );
-      //   connection.query(query, (err, rows, fields) => {
-      //     if (!err) {
-      //       res.json({ status: "Data Updated" });
-      //     } else { 
-      //       console.log(err);
-      //     }
-      //   });
-      
+          const data = JSON.parse(datos[i]);
+          const query = ` INSERT INTO pruebas.pruebaapi SET valor1 = ` + "'" + data.valor1 + "'" + ' , valor2 = ' + "'" + data.valor2 + "'" + ' , valor3 =' + "'" + data.valor3 + "'";
+        connection.query(query, (err, rows) => {
+          if (!err) {
+            console.log(res);
+          } else { 
+            console.log(err);
+          }
+        });
+
+        console.log(res);
     }
     
    }); 
