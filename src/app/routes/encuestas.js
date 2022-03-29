@@ -86,17 +86,23 @@ module.exports = (app) => {
 
   //INSERT DATA WITH JSON DOCUMENT
   app.post("/testing", (req, res) => {
-    for (let i = 0; i < movies.length; i++) {
-        const query = ` INSERT INTO pruebas.pruebaapi SET valor1 = ` + "'" + movies[i].valor1 + "'" + ' , valor2 = ' + "'" + movies[i].valor2 + "'" + ' , valor3 =' + "'" + movies[i].valor3 + "'";
-        connection.query(query, (err, rows, fields) => {
-          if (!err) {
-            console.log("Ok");
-          } else { 
-            console.log("Error");
-          }
-        });
-      }
+    const datos = req.body;
 
+    console.log( datos );
+    for (let i = 0; i < datos.length; i++) {
+         const query = ` INSERT INTO pruebas.pruebaapi SET valor1 = ` + "'" + datos[i].valor1 + "'" + ' , valor2 = ' + "'" + datos[i].valor2 + "'" + ' , valor3 =' + "'" + datos[i].valor3 + "'";
+        //  console.log( datos[i] );
+        //  console.log( datos[i].valor1 );
+      //   connection.query(query, (err, rows, fields) => {
+      //     if (!err) {
+      //       res.json({ status: "Data Updated" });
+      //     } else { 
+      //       console.log(err);
+      //     }
+      //   });
+      
+    }
+    
    }); 
 
 
