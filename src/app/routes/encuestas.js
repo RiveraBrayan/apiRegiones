@@ -9,6 +9,7 @@ module.exports = (app) => {
      connection.query("SELECT * FROM pruebas.pruebaapi", (err, rows, fields) => {
       if (!err) {
         res.json(rows);
+        console.log(rows);
       } else {
         console.log(err);
       }
@@ -53,7 +54,7 @@ module.exports = (app) => {
     console.log(valor1, valor2, valor3);
 
     const query = ` INSERT INTO pruebas.pruebaapi SET valor1 = ` + "'" + valor1 + "'" + ' , valor2 = ' + "'" + valor2 + "'" + ' , valor3 =' + "'" + valor3 + "'";
-    // res.json({ query });
+      // res.json({ query });
 
      connection.query(query, (err, rows, fields) => {
       if (!err) {
@@ -84,20 +85,20 @@ module.exports = (app) => {
 
 
 
-//   //INSERT DATA WITH JSON DOCUMENT
-//   app.post("/testing", (req, res) => {
-//     for (let i = 0; i < movies.length; i++) {
-//         const query = ` INSERT INTO pruebas.pruebaapi SET valor1 = ` + "'" + movies[i].valor1 + "'" + ' , valor2 = ' + "'" + movies[i].valor2 + "'" + ' , valor3 =' + "'" + movies[i].valor3 + "'";
-//         connection.query(query, (err, rows, fields) => {
-//           if (!err) {
-//             console.log("Ok");
-//           } else { 
-//             console.log("Error");
-//           }
-//         });
-//       }
+  //INSERT DATA WITH JSON DOCUMENT
+  app.post("/testing", (req, res) => {
+    for (let i = 0; i < movies.length; i++) {
+        const query = ` INSERT INTO pruebas.pruebaapi SET valor1 = ` + "'" + movies[i].valor1 + "'" + ' , valor2 = ' + "'" + movies[i].valor2 + "'" + ' , valor3 =' + "'" + movies[i].valor3 + "'";
+        connection.query(query, (err, rows, fields) => {
+          if (!err) {
+            console.log("Ok");
+          } else { 
+            console.log("Error");
+          }
+        });
+      }
 
-//    }); 
+   }); 
 
 
 
